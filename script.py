@@ -6,6 +6,7 @@ openai.api_key = "sk-dummykey"
 
 def get_transcription(audio_file):
     with open(audio_file, "rb") as file:
+        #transcription = {"text": "test"}
         transcription = openai.Audio.transcribe("whisper-1", file)
     total_text = transcription["text"]
     #total_text = " ".join([segment["text"] for segment in transcription['segments']])
@@ -27,7 +28,7 @@ def main(args):
         if filename.endswith(".wav") or filename.endswith(".mp3"):  # or whatever your audio file extensions are
             print(f"Processing {filename}")
             # Extract id from the filename
-            file_id = filename.split('_')[0]
+            file_id = int(filename.split('.')[0])
 
             # Skip the file if its id already exists in the csv
             if file_id in existing_ids:
